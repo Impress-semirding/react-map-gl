@@ -4,6 +4,7 @@
 // avoid destructuring for older Node version support
 const resolve = require('path').resolve;
 const webpack = require('webpack');
+const FlowBabelWebpackPlugin = require('flow-babel-webpack-plugin');
 
 // Otherwise modules imported from outside this directory does not compile.
 // Also needed if modules from this directory were imported elsewhere
@@ -13,7 +14,7 @@ const BABEL_CONFIG = {
   presets: [
     'es2015',
     'react',
-    'stage-2'
+    'stage-0'
   ].map(function configMap(name) {
     return require.resolve(`babel-preset-${name}`);
   })
@@ -30,7 +31,6 @@ const config = {
     rules: [{
       // Compile ES2015 using bable
       test: /\.js$/,
-      include: [resolve('.')],
       exclude: [/node_modules/],
       use: [{
         loader: 'babel-loader',
@@ -39,16 +39,23 @@ const config = {
     }]
   },
 
+  node: {
+    fs: 'empty'
+  },
+
   resolve: {
     alias: {
+      'react-map-gl': resolve('../../src'),
       // From mapbox-gl-js README. Required for non-browserify bundlers (e.g. webpack):
-      'mapbox-gl$': resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js')
+      'mapbox-gl$': resolve('./../../modules/mapbox-gl/src'),
+      webworkify: 'webworkify-webpack-dropin'
     }
   },
 
   // Optional: Enables reading mapbox token from environment variable
   plugins: [
-    new webpack.EnvironmentPlugin(['MapboxAccessToken'])
+    new webpack.EnvironmentPlugin(['MapboxAccessToken']),
+    new FlowBabelWebpackPlugin()
   ]
 };
 

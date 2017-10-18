@@ -9,7 +9,7 @@ import CityInfo from './city-info';
 
 import CITIES from '../../data/cities.json';
 
-const TOKEN = ''; // Set your mapbox token here
+const TOKEN = 'pk.eyJ1Ijoic2VuaXIiLCJhIjoiY2o4bWdlMmpxMHljYTJ3cGY0N2FiczF4eCJ9.68Rkgy09U9JZzmST0oyE-w'; // Set your mapbox token here
 
 const navStyle = {
   position: 'absolute',

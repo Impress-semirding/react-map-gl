@@ -27,6 +27,12 @@ const LOCAL_DEVELOPMENT_CONFIG = {
       react: resolve(LIB_DIR, './node_modules/react')
     }
   },
+  node: {
+    fs: 'empty'
+  },
+  browser: {
+    fs: false
+  },
   module: {
     rules: []
   },
